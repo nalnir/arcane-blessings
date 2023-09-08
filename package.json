@@ -1,5 +1,5 @@
 {
-  "name": "arcane-blessings",
+  "name": "crypties/arcane-blessings",
   "version": "0.0.12",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "lint": "tsc",
-    "ci": "pnpm run lint && pnpm run build"
+    "ci": "pnpm run lint && pnpm run build",
+    "release": "pnpm run lint && pnpm run build && changesets publish"
   },
   "author": "Lukas Stateczny",
   "license": "MIT",
