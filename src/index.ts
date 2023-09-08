@@ -1,4 +1,4 @@
-import { Charge } from './src/blessings';
+import { Charge } from './blessings';
 
 // Create a mapping of power names to power classes or functions
 const powerRegistry: { [key: string]: any } = {

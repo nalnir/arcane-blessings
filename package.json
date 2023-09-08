@@ -6,8 +6,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsup index.ts --format cjs,esm --dts",
-    "lint": "tsc"
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "lint": "tsc",
+    "ci": "pnpm run lint && pnpm run build"
   },
   "author": "Lukas Stateczny",
   "license": "MIT",
@@ -16,5 +17,8 @@
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
-  "description": "List of special powers and abilities for crypties cards."
+  "description": "List of special powers and abilities for crypties cards.",
+  "dependencies": {
+    "@types/node": "^20.5.9"
+  }
 }
