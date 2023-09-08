@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist",
+      "declaration": true,
+      "target": "ES6",
+      "module": "CommonJS",
+      "typeRoots": ["src/types.ts"],
+      "noUncheckedIndexedAccess": true,
+      "noEmit": true
+    },
+    "include": ["src/**/*.ts"]
+}
