@@ -1,5 +1,5 @@
 {
-  "name": "crypties/arcane-blessings",
+  "name": "@crypties/arcane-blessings",
   "version": "0.0.12",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
