@@ -1,5 +1,11 @@
 # @crypties/arcane-blessings
 
+## 0.0.6
+
+### Patch Changes
+
+- f093f7b: Initial
+
 ## 0.0.5
 
 ### Patch Changes
