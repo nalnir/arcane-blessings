@@ -1,5 +1,11 @@
 # @crypties/arcane-blessings
 
+## 0.0.7
+
+### Patch Changes
+
+- da6c634: Trying to publish this sucker
+
 ## 0.0.6
 
 ### Patch Changes
