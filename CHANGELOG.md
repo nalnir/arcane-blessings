@@ -1,5 +1,11 @@
 # @crypties/arcane-blessings
 
+## 0.0.4
+
+### Patch Changes
+
+- 246cf22: Publish to npm try
+
 ## 0.0.3
 
 ### Patch Changes
