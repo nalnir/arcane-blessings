@@ -1,5 +1,11 @@
 # @crypties/arcane-blessings
 
+## 0.0.5
+
+### Patch Changes
+
+- 2e99b07: Fixed some issues with publish.yaml
+
 ## 0.0.4
 
 ### Patch Changes
