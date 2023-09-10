@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.0.3
+
+### Patch Changes
+
+- c6d3183: Adding dist folder
+
 ## 0.0.2
 
 ### Patch Changes
