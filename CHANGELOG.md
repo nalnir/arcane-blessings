@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.0.4
+
+### Patch Changes
+
+- c5eb928: Fixing issue?
+
 ## 0.0.3
 
 ### Patch Changes
