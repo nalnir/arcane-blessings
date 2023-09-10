@@ -1,4 +1,4 @@
-# @crypties/arcane-blessings
+# arcane-blessings
 
 ## 0.0.7
 
