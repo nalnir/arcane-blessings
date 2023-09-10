@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+- Initial commit
+
+## 0.0.2
+
+### Patch Changes
+
 - 5db60f3: Initial commit
 
 ## 0.0.7
