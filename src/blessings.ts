@@ -5,3 +5,9 @@ export class Charge {
         return 'charge'
     }
 }
+
+export class ArcaneAffinity {
+    execute(activeDeck: OriginalCard[], playableCards: OriginalCard[], cardsOnTable: OriginalCard[]): string {
+        return 'arcaneAffinity'
+    }
+}
