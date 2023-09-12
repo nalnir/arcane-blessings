@@ -11,3 +11,9 @@ export class ArcaneAffinity {
         return 'arcaneAffinity!'
     }
 }
+
+export class BloodCurse {
+    execute(activeDeck: OriginalCard[], playableCards: OriginalCard[], cardsOnTable: OriginalCard[]): string {
+        return 'bloodCurse'
+    }
+}
