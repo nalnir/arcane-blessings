@@ -1,5 +1,12 @@
 # arcane-blessings
 
+## 0.0.6
+
+### Patch Changes
+
+- d886e00: Adding bloodcurse
+- d886e00: Testing automatic update to crypties
+
 ## 0.0.5
 
 ### Patch Changes
