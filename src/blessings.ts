@@ -8,6 +8,6 @@ export class Charge {
 
 export class ArcaneAffinity {
     execute(activeDeck: OriginalCard[], playableCards: OriginalCard[], cardsOnTable: OriginalCard[]): string {
-        return 'arcaneAffinity'
+        return 'arcaneAffinity!'
     }
 }
