@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.1.0
+
+### Minor Changes
+
+- ed0f721: Added several powers
+
 ## 0.0.6
 
 ### Patch Changes
