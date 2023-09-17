@@ -2,5 +2,7 @@ src
 .changeset
 .github
 .pnpm-lock.yaml
+.prettierrc
+format_exports.js
 tsconfig.json
 vite.config.ts

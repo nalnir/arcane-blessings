@@ -1,3 +1,21 @@
+export enum EffectType {
+    ON_CARD_PLACEMENT = "ON_CARD_PLACEMENT",
+    AFTER_BASIC_ATTACK = "AFTER_BASIC_ATTACK",
+    AFTER_OPPONENT_BASIC_ATTACK = "AFTER_OPPONENT_BASIC_ATTACK",
+    AFTER_END_TURN = "AFTER_END_TURN",
+    AFTER_OPPONENT_END_TURN = "AFTER_OPPONENT_END_TURN"
+}
+type NumberBetweenOneAndTen = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+export interface PowerEntry {
+    creator: string; // Ethereum address
+    description: string; // Up to 50 characters
+    takesEffect: EffectType; // Enum for effect type
+    level: NumberBetweenOneAndTen,
+    fee: NumberBetweenOneAndTen,
+    execute: (data: SpecialAttackData) => SpecialAttackData;
+}
+  
+
 export interface OriginalCard {
     name: string,
     description: string,
@@ -33,3 +51,22 @@ export interface OriginalCard {
     token_address?: string
 }
 
+export interface Hero {
+    health: number;
+}
+
+export interface SpecialAttackData {
+    attackingCard: OriginalCard
+    attackerCardsOnBoard: OriginalCard[]
+    attackerCardInHand: OriginalCard[]
+    attackerDeck: OriginalCard[]
+    attackerDiscardedCards: OriginalCard[]
+    attackerHero: Hero
+
+    attackedCard: OriginalCard
+    opponentCardsOnBoard: OriginalCard[]
+    opponentCardInHand: OriginalCard[]
+    opponentDeck: OriginalCard[]
+    opponentDiscardedCards: OriginalCard[]
+    opponentHero: Hero
+}
