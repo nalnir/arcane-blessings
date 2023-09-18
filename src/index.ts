@@ -1,3 +1,4 @@
+/// <reference path="./types.ts" />
 import { arcaneAffinity, arcaneMastery, divineFury, divineShield, dragonBreath, frostNova } from "./blessings";
 import { EffectType, PowerEntry, SpecialAttackData } from "./types";
 
