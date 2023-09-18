@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.1.1
+
+### Patch Changes
+
+- 85cbda5: Included types by referencing.
+
 ## 0.1.0
 
 ### Minor Changes
