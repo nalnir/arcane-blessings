@@ -4,8 +4,8 @@ import { damage, discard, randomChance, shouldDiscard } from "./utils/helper_fun
 export function arcaneAffinity(data: SpecialAttackData): SpecialAttackData  {
     if(data.attackerCardsOnBoard.length > 0) {
         const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
-        const randomIndex = Math.floor(Math.random() * data.attackerCardsOnBoard.length);
-        const randomCard = data.attackerCardsOnBoard[randomIndex];
+        const randomIndex = Math.floor(Math.random() * newData.attackerCardsOnBoard.length);
+        const randomCard = newData.attackerCardsOnBoard[randomIndex];
         if(randomCard?.metadata.manaCost) {
             let manaCost = randomCard.metadata.manaCost;
             if (manaCost > 2) {
@@ -27,7 +27,7 @@ export function arcaneMastery(data: SpecialAttackData): SpecialAttackData  {
     if(newData.attackerCardsOnBoard.length > 1) {
         let highestManaCard: OriginalCard = newData.attackerCardsOnBoard[0];
         let highestManaCardIndex = 0
-        for (let i = 1; i < newData.attackerCardsOnBoard.length; i++) {
+        for (let i = 0; i < newData.attackerCardsOnBoard.length; i++) {
             const card = newData.attackerCardsOnBoard[i];
             if (card?.metadata?.manaCost ?? 0 > highestManaCard?.metadata?.manaCost ?? 0) {
                 highestManaCard = card;
