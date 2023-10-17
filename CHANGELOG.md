@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.1.2
+
+### Patch Changes
+
+- 1e567c4: Minor modifications to arcaneMastery and arcaneAffinity
+
 ## 0.1.1
 
 ### Patch Changes
