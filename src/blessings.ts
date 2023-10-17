@@ -2,23 +2,33 @@ import { OriginalCard, SpecialAttackData } from "./types";
 import { damage, discard, randomChance, shouldDiscard } from "./utils/helper_functions";
 
 export function arcaneAffinity(data: SpecialAttackData): SpecialAttackData  {
+    console.log('Initial log: ', data)
     if(data.attackerCardsOnBoard.length > 0) {
+        console.log('attackerCardsOnBoard is ', data.attackerCardsOnBoard.length)
         const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
+        console.log('newData: ', newData)
         const randomIndex = Math.floor(Math.random() * newData.attackerCardsOnBoard.length);
+        console.log('randomIndex: ', randomIndex)
         const randomCard = newData.attackerCardsOnBoard[randomIndex];
+        console.log('randomCard: ', randomCard)
         if(randomCard?.metadata.manaCost) {
             let manaCost = randomCard.metadata.manaCost;
+            console.log('randomCard manaCost: ', manaCost)
             if (manaCost > 2) {
                 manaCost -= 2;
             } else {
                 manaCost = 1;
             }
             randomCard.metadata.manaCost = manaCost;
+            console.log('changed randomCard manaCost: ', randomCard.metadata.manaCost)
             newData.attackerCardsOnBoard[randomIndex] = randomCard;
+            console.log('newData changed: ', newData)
             return newData
         }
+        console.log('randomCard manaCost: NO MANA COST!')
         return data
     }
+    console.log('attackerCardsOnBoard is 0')
     return data
 }
 
