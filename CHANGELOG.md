@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.1.5
+
+### Patch Changes
+
+- f186690: Added more powers and linger effect mechanism
+
 ## 0.1.4
 
 ### Patch Changes
