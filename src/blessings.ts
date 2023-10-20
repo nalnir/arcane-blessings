@@ -1,34 +1,26 @@
-import { OriginalCard, SpecialAttackData } from "./types";
+import { LingerEffect, LingerEffectOpTarget, LingerEffectOperation, OriginalCard, SpecialAttackData } from "./types";
 import { damage, discard, randomChance, shouldDiscard } from "./utils/helper_functions";
 
 export function arcaneAffinity(data: SpecialAttackData): SpecialAttackData  {
-    console.log('Initial log: ', data)
     if(data.attackerCardsOnBoard.length > 0) {
-        console.log('attackerCardsOnBoard is ', data.attackerCardsOnBoard.length)
         const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
-        console.log('newData: ', newData)
         const randomIndex = Math.floor(Math.random() * newData.attackerCardsOnBoard.length);
-        console.log('randomIndex: ', randomIndex)
         const randomCard = newData.attackerCardsOnBoard[randomIndex];
-        console.log('randomCard: ', randomCard)
+
         if(randomCard?.metadata.manaCost) {
             let manaCost = randomCard.metadata.manaCost;
-            console.log('randomCard manaCost: ', manaCost)
             if (manaCost > 2) {
                 manaCost -= 2;
             } else {
                 manaCost = 1;
             }
             randomCard.metadata.manaCost = manaCost;
-            console.log('changed randomCard manaCost: ', randomCard.metadata.manaCost)
             newData.attackerCardsOnBoard[randomIndex] = randomCard;
-            console.log('newData changed: ', newData)
+
             return newData
         }
-        console.log('randomCard manaCost: NO MANA COST!')
         return data
     }
-    console.log('attackerCardsOnBoard is 0')
     return data
 }
 
@@ -112,33 +104,178 @@ export function dragonBreath(data: SpecialAttackData): SpecialAttackData  {
 }
 
 export function frostNova(data: SpecialAttackData): SpecialAttackData  {
+    const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
+    if(newData.opponentCardsOnBoard.length > 0) {
+        const randomIndex = Math.floor(Math.random() * newData.opponentCardsOnBoard.length);
+        const randomCard = newData.opponentCardsOnBoard[randomIndex];
+
+        const newLingerEffect: LingerEffect = {
+            turns: 1,
+            target: [randomCard],
+            effects: [{
+                operation: LingerEffectOperation.FREEZE,
+                opTarget: LingerEffectOpTarget.HEALTH,
+                strength: 0
+            }],
+            shouldRestoreToPreviousState: true,
+        }
+
+        newData.lingerEffect = [newLingerEffect];
+        return newData
+    }
     return data
 }
 
 export function infernalRage(data: SpecialAttackData): SpecialAttackData  {
+    const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
+    if(newData.opponentCardsOnBoard.length > 0) {
+        newData.attackedCard.metadata.health -= data.attackerDiscardedCards.length
+        return newData;
+    }
     return data
 }
 
 export function lycanthropy(data: SpecialAttackData): SpecialAttackData  {
+    const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
+    if (newData.opponentCardsOnBoard.length > 0) {
+        const randomIndex = Math.floor(Math.random() * newData.attackerCardsOnBoard.length);
+        const randomCard = newData.attackerCardsOnBoard[randomIndex];
+
+        const takeLifeEffect: LingerEffect = {
+            turns: 2,
+            target: [newData.attackedCard],
+            effects: [{
+                operation: LingerEffectOperation.SUBTRACT,
+                opTarget: LingerEffectOpTarget.HEALTH,
+                strength: 2
+            }],
+            shouldRestoreToPreviousState: false,
+        }
+
+        const addLifeEffect: LingerEffect = {
+            turns: 2,
+            target: [randomCard],
+            effects: [{
+                operation: LingerEffectOperation.ADD,
+                opTarget: LingerEffectOpTarget.HEALTH,
+                strength: 1
+            }],
+            shouldRestoreToPreviousState: false,
+        }
+
+        newData.lingerEffect = [takeLifeEffect, addLifeEffect];
+        return newData
+    }
     return data
 }
 
 export function ressurect(data: SpecialAttackData): SpecialAttackData  {
+    const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
+    if (newData.attackerDiscardedCards.length > 0) {
+        let highestAttack = 0;
+        let ressurectedCard: OriginalCard = undefined;
+        let ressurectedCardIdx = 0;
+        newData.attackerDiscardedCards.forEach((card, index) => {
+            if(card.metadata.attackPower > highestAttack) {
+                highestAttack = card.metadata.attackPower;
+                ressurectedCard = card;
+                ressurectedCardIdx = index
+            }
+        })
+        newData.attackerDiscardedCards.splice(ressurectedCardIdx, 1)
+
+        const randomIndex = Math.floor(Math.random() * newData.attackerDeck.length);
+        newData.attackerDeck.splice(randomIndex, 0, ressurectedCard);
+
+    }
     return data
 }
 
 export function stealth(data: SpecialAttackData): SpecialAttackData  {
+    const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
+    if (newData.attackerCardsOnBoard.length > 0) {
+        const randomIndex = Math.floor(Math.random() * newData.attackerCardsOnBoard.length);
+        const randomCard = newData.attackerCardsOnBoard[randomIndex];
+
+        const renderUnblockable: LingerEffect = {
+            turns: 3,
+            target: [randomCard],
+            effects: [{
+                operation: LingerEffectOperation.UNBLOCKABLE,
+                opTarget: LingerEffectOpTarget.HEALTH,
+                strength: 1
+            }],
+            shouldRestoreToPreviousState: true,
+        }
+
+        newData.lingerEffect = [renderUnblockable];
+        return newData
+    }
     return data
 }
 
 export function suddenStrike(data: SpecialAttackData): SpecialAttackData  {
+    const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
+    if (newData.opponentCardsOnBoard.length > 0) {
+        const randomIndex = Math.floor(Math.random() * newData.attackerCardsOnBoard.length);
+        const randomCard = newData.attackerCardsOnBoard[randomIndex];
+        const chanceDamage = Math.floor(Math.random() * 6);
+
+        if(randomChance(35)) {
+            newData.opponentHero.health -= chanceDamage
+            return newData
+        }
+        randomCard.metadata.health -= chanceDamage
+        if(shouldDiscard(randomCard)) {
+            const resDiscard = discard(randomCard, newData.opponentCardsOnBoard, newData.opponentDiscardedCards)
+            newData.opponentCardsOnBoard = resDiscard.discardFrom;
+            newData.opponentDiscardedCards = resDiscard.discardTo;
+        } else {
+            newData.opponentCardsOnBoard[randomIndex] = randomCard;
+        }
+        return newData;
+    }
     return data
 }
 
 export function thunderStrike(data: SpecialAttackData): SpecialAttackData  {
+    const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
+    if (newData.opponentCardsOnBoard.length > 0) {
+        const discardedOpponentCards: OriginalCard[] = []
+        newData.opponentCardsOnBoard.map((card) => {
+            const chanceDamage = Math.floor(Math.random() * 4);
+            card.metadata.health -= chanceDamage
+            if(card.metadata.health <= 0) {
+                discardedOpponentCards.push(card);
+            }
+            return card
+        })
+        newData.opponentDiscardedCards = [...discardedOpponentCards]
+        if(randomChance(30)) {
+            const randomIndex = Math.floor(Math.random() * newData.attackerCardsOnBoard.length);
+            const randomCard = newData.attackerCardsOnBoard[randomIndex];
+            const chanceDamageToOwn = Math.floor(Math.random() * 3);
+            randomCard.metadata.health -= chanceDamageToOwn
+            if(shouldDiscard(randomCard)) {
+                const resDiscard = discard(randomCard, newData.attackerCardsOnBoard, newData.attackerDiscardedCards)
+                newData.attackerCardsOnBoard = resDiscard.discardFrom;
+                newData.attackerDiscardedCards = resDiscard.discardTo;
+            }
+        }
+        return newData;
+    }
     return data
 }
 
 export function wisdomGaze(data: SpecialAttackData): SpecialAttackData  {
+    const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
+    if (newData.attackerCardsOnBoard.length > 0) {
+        const randomIndex = Math.floor(Math.random() * newData.attackerCardsOnBoard.length);
+        const randomCard = newData.attackerCardsOnBoard[randomIndex];
+        randomCard.metadata.manaCost = 1
+        newData.attackerCardsOnBoard[randomIndex] = randomCard
+
+        return newData;
+    }
     return data
 }

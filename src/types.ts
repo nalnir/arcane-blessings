@@ -5,6 +5,29 @@ export enum EffectType {
     AFTER_END_TURN = "AFTER_END_TURN",
     AFTER_OPPONENT_END_TURN = "AFTER_OPPONENT_END_TURN"
 }
+export enum LingerEffectOperation {
+    ADD = "ADD",
+    SUBTRACT = "SUBTRACT",
+    MULTIPLY = "MULTIPLY",
+    DIVIDE = "DIVIDE",
+    FREEZE = "FREEZE",
+    UNBLOCKABLE = "UNBLOCKABLE"
+}
+export enum LingerEffectOpTarget {
+    MANA = "MANA",
+    HEALTH = "HEALTH",
+    POWER = "POWER"
+}
+export interface LingerEffect {
+    turns: number,
+    target: OriginalCard[],
+    effects: {
+        operation: LingerEffectOperation,
+        opTarget: LingerEffectOpTarget,
+        strength: number
+    }[],
+    shouldRestoreToPreviousState: boolean,
+}
 type NumberBetweenOneAndTen = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 export interface PowerEntry {
     creator: string; // Ethereum address
@@ -12,7 +35,8 @@ export interface PowerEntry {
     takesEffect: EffectType; // Enum for effect type
     level: NumberBetweenOneAndTen,
     fee: NumberBetweenOneAndTen,
-    execute: (data: SpecialAttackData) => SpecialAttackData;
+    execute: (data: SpecialAttackData) => SpecialAttackData,
+    usageTimes: number;
 }
   
 
@@ -69,4 +93,5 @@ export interface SpecialAttackData {
     opponentDeck: OriginalCard[]
     opponentDiscardedCards: OriginalCard[]
     opponentHero: Hero
+    lingerEffect: LingerEffect[]
 }
