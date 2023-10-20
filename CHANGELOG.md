@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.1.4
+
+### Patch Changes
+
+- c12db24: Logging inside the power
+
 ## 0.1.3
 
 ### Patch Changes
