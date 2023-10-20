@@ -97,7 +97,7 @@ const powerRegistry: Record<string, PowerEntry> = {
   },
   suddenStrike: {
     creator: '0x8CA049B20731fF92Fe8fc8535531497FB83247FE',
-    description: "Deals damage between 0-5 to random opponent card. Has 35% chance to damage opponent hero.",
+    description: "Deals damage between 1-5 to random opponent card. Has 35% chance to damage opponent hero.",
     takesEffect: EffectType.ON_CARD_PLACEMENT,
     level: 4,
     fee: 4,

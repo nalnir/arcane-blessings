@@ -66,7 +66,7 @@ export function divineShield(data: SpecialAttackData): SpecialAttackData  {
     let newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
     if(randomChance(45)) {
         const attackingCardIndex = newData.attackerCardsOnBoard.findIndex((card) => card.token_id === newData.attackingCard.token_id)
-        newData.attackingCard.metadata.health -= newData.attackingCard.metadata.attackPower
+        newData.attackingCard.metadata.health -= newData.attackedCard.metadata.attackPower
         const damagedCard = damage(newData.attackingCard, newData.attackingCard);
         if(shouldDiscard(damagedCard)) {
             const resDiscard = discard(damagedCard, newData.attackerCardsOnBoard, newData.attackerDiscardedCards)
@@ -80,27 +80,28 @@ export function divineShield(data: SpecialAttackData): SpecialAttackData  {
     return data
 }
 
-export function dragonBreath(data: SpecialAttackData): SpecialAttackData  {
+export function dragonBreath(data: SpecialAttackData): SpecialAttackData {
     const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
-    if(newData.opponentCardsOnBoard.length > 0) {
-        newData.opponentCardsOnBoard.map((card, index) => {
-            if(card.token_id !== newData.attackedCard.token_id) {
-                if(randomChance(35)) {
-                    card.metadata.health -= 2
+    if (newData.opponentCardsOnBoard.length > 0) {
+        newData.opponentCardsOnBoard = newData.opponentCardsOnBoard.map((card) => {
+            if (card.token_id !== newData.attackedCard.token_id) {
+                if (randomChance(35)) {
+                    card.metadata.health -= 2;
                 } else {
-                    card.metadata.health -= 1
+                    card.metadata.health -= 1;
                 }
-                if(card.metadata.health <= 0) {
+                if (card.metadata.health <= 0) {
                     newData.opponentDiscardedCards.push(card);
                     return null;
                 }
                 return card;
             }
             return card;
-        }).filter(card => card !== null);
+        }).filter((card): card is OriginalCard => card !== null); // Use type assertion here
+
         return newData;
     }
-    return data
+    return data;
 }
 
 export function frostNova(data: SpecialAttackData): SpecialAttackData  {
@@ -186,7 +187,7 @@ export function ressurect(data: SpecialAttackData): SpecialAttackData  {
 
         const randomIndex = Math.floor(Math.random() * newData.attackerDeck.length);
         newData.attackerDeck.splice(randomIndex, 0, ressurectedCard);
-
+        return newData;
     }
     return data
 }
@@ -219,7 +220,7 @@ export function suddenStrike(data: SpecialAttackData): SpecialAttackData  {
     if (newData.opponentCardsOnBoard.length > 0) {
         const randomIndex = Math.floor(Math.random() * newData.attackerCardsOnBoard.length);
         const randomCard = newData.attackerCardsOnBoard[randomIndex];
-        const chanceDamage = Math.floor(Math.random() * 6);
+        const chanceDamage = Math.ceil(Math.random() * 6);
 
         if(randomChance(35)) {
             newData.opponentHero.health -= chanceDamage
@@ -242,14 +243,15 @@ export function thunderStrike(data: SpecialAttackData): SpecialAttackData  {
     const newData: SpecialAttackData = JSON.parse(JSON.stringify(data));
     if (newData.opponentCardsOnBoard.length > 0) {
         const discardedOpponentCards: OriginalCard[] = []
-        newData.opponentCardsOnBoard.map((card) => {
-            const chanceDamage = Math.floor(Math.random() * 4);
+        newData.opponentCardsOnBoard = newData.opponentCardsOnBoard.map((card) => {
+            const chanceDamage = Math.floor(Math.random() * 3);
             card.metadata.health -= chanceDamage
-            if(card.metadata.health <= 0) {
+            if (card.metadata.health <= 0) {
                 discardedOpponentCards.push(card);
+                return null;
             }
             return card
-        })
+        }).filter((card): card is OriginalCard => card !== null);
         newData.opponentDiscardedCards = [...discardedOpponentCards]
         if(randomChance(30)) {
             const randomIndex = Math.floor(Math.random() * newData.attackerCardsOnBoard.length);
