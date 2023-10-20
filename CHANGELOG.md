@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.1.6
+
+### Patch Changes
+
+- 2ae54d4: Hotfixed couple of powers.
+
 ## 0.1.5
 
 ### Patch Changes
