@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.1.8
+
+### Patch Changes
+
+- bfa29de: Hotfix
+
 ## 0.1.7
 
 ### Patch Changes
