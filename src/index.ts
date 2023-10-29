@@ -1,6 +1,27 @@
 /// <reference path="./types.ts" />
 import { arcaneAffinity, arcaneMastery, divineFury, divineShield, dragonBreath, frostNova, infernalRage, lycanthropy, ressurect, stealth, suddenStrike, thunderStrike, wisdomGaze } from "./blessings";
-import { EffectType, PowerEntry, SpecialAttackData } from "./types";
+import { PowerEntry, SpecialAttackData } from "./types";
+
+export enum EffectType {
+  ON_CARD_PLACEMENT = "ON_CARD_PLACEMENT",
+  AFTER_BASIC_ATTACK = "AFTER_BASIC_ATTACK",
+  AFTER_OPPONENT_BASIC_ATTACK = "AFTER_OPPONENT_BASIC_ATTACK",
+  AFTER_END_TURN = "AFTER_END_TURN",
+  AFTER_OPPONENT_END_TURN = "AFTER_OPPONENT_END_TURN"
+}
+export enum LingerEffectOperation {
+  ADD = "ADD",
+  SUBTRACT = "SUBTRACT",
+  MULTIPLY = "MULTIPLY",
+  DIVIDE = "DIVIDE",
+  FREEZE = "FREEZE",
+  UNBLOCKABLE = "UNBLOCKABLE"
+}
+export enum LingerEffectOpTarget {
+  MANA = "MANA",
+  HEALTH = "HEALTH",
+  POWER = "POWER"
+}
 
 
 // Create a mapping of power names to power classes or functions
@@ -123,6 +144,7 @@ const powerRegistry: Record<string, PowerEntry> = {
     usageTimes: 2
   }
 };
+
 
 // Export the registry
 export default powerRegistry;

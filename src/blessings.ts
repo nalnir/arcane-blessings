@@ -1,4 +1,5 @@
-import { LingerEffect, LingerEffectOpTarget, LingerEffectOperation, OriginalCard, SpecialAttackData } from "./types";
+import { LingerEffectOpTarget, LingerEffectOperation } from ".";
+import { LingerEffect, OriginalCard, SpecialAttackData } from "./types";
 import { damage, discard, randomChance, shouldDiscard } from "./utils/helper_functions";
 
 export function arcaneAffinity(data: SpecialAttackData): SpecialAttackData  {
