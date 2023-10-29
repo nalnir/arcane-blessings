@@ -1,0 +1,5 @@
+---
+'arcane-blessings': patch
+---
+
+Hotfix
