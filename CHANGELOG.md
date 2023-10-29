@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.1.7
+
+### Patch Changes
+
+- 642d46d: Including types
+
 ## 0.1.6
 
 ### Patch Changes
