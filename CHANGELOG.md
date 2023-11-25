@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.1.9
+
+### Patch Changes
+
+- 44d46d9: Type addition
+
 ## 0.1.8
 
 ### Patch Changes
