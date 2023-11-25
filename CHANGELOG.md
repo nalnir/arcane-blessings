@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.1.10
+
+### Patch Changes
+
+- 8c49684: typo fix
+
 ## 0.1.9
 
 ### Patch Changes
