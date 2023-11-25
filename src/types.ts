@@ -59,6 +59,7 @@ export interface OriginalCard {
 }
 
 export interface Hero {
+    image: string;
     health: number;
 }
 
