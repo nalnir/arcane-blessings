@@ -41,6 +41,7 @@ export interface OriginalCard {
         ipfsCID?: string,
         imageId: string
     },
+    specialPowerUsed: number,
     orders?: {
         sell_orders?: Array<{
             buy_decimals: number,
@@ -54,7 +55,7 @@ export interface OriginalCard {
         }>
     },
     token_id?: string,
-    token_address?: string
+    token_address?: string,
 }
 
 export interface Hero {
@@ -64,7 +65,7 @@ export interface Hero {
 export interface SpecialAttackData {
     attackingCard: OriginalCard
     attackerCardsOnBoard: OriginalCard[]
-    attackerCardInHand: OriginalCard[]
+    attackerCardsInHand: OriginalCard[]
     attackerDeck: OriginalCard[]
     attackerDiscardedCards: OriginalCard[]
     attackerHero: Hero
