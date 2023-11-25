@@ -1,5 +1,11 @@
 # arcane-blessings
 
+## 0.1.11
+
+### Patch Changes
+
+- 2581158: build the types
+
 ## 0.1.10
 
 ### Patch Changes
